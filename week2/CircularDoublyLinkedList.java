@@ -1,11 +1,11 @@
-public class DLList {
+public class DLList<E> {
   
   private class Node {
-    private int value;
+    private E value;
     private Node next;
     private Node prev;
     
-    public Node(int x, Node p, Node n) {
+    public Node(E x, Node p, Node n) {
       this.value = x;
       this.prev = p;
       this.next = n;      
@@ -17,14 +17,14 @@ public class DLList {
 
   /* Constructor to initialize empty list */
   public DLList() {
-    this.sentinel = new Node(0, null, null);
+    this.sentinel = new Node(null, null, null);
     this.sentinel.next = this.sentinel;
     this.sentinel.prev = this.sentinel;
     this.size = 0;
   }
   
   /* Add node to front of list */
-  public void addFirst(int x) {
+  public void addFirst(E x) {
     this.sentinel.next = new Node(x, this.sentinel, this.sentinel.next);
     this.sentinel.next.next.prev = this.sentinel.next;
     if (this.size == 0) {
@@ -34,7 +34,7 @@ public class DLList {
   }
   
   /* Add node to end of list */
-  public void addLast(int x) {
+  public void addLast(E x) {
     this.sentinel.prev = new Node(x, this.sentinel.prev, this.sentinel);
     this.sentinel.prev.prev.next = this.sentinel.prev;
     if (this.size == 0) {
@@ -44,12 +44,12 @@ public class DLList {
   }
   
   /* Get first value from list */
-  public int getFirst() {
+  public E getFirst() {
     return this.sentinel.next.value;
   }
 
   /* Get last value from list */
-  public int getLast() {
+  public E getLast() {
     return this.sentinel.prev.value;
   }
   
@@ -77,13 +77,23 @@ public class DLList {
   }
   
   public static void main(String[] args) {
-    DLList d = new DLList();
-    d.addLast(9);
-    d.addLast(8);
-    d.addLast(7);
-    d.addFirst(6);
-    d.removeLast();
-    d.removeFirst();
-    System.out.println(d.size());
+    /* List of integers */
+    DLList<Integer> d1 = new DLList<>();
+    d1.addLast(1);
+    d1.addLast(2);
+    d1.addLast(3);
+    d1.addFirst(0);
+    d1.removeLast();
+    d1.removeFirst();
+    
+    /* List of strings */
+    DLList<String> d2 = new DLList<>();
+    d2.addFirst("test1");
+    d2.addFirst("test0");
+    d2.addLast("test2");
+    d2.addLast("test3");
+    d2.removeFirst();
+    d2.removeLast();
+    System.out.println(d2.size());
   }
 }
